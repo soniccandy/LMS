@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', employeeID: '', password: '' });
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -28,6 +28,13 @@ const Login = () => {
           placeholder="Email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className="w-full mb-4 p-2 border rounded"
+        />
+        <input
+          type="employeeID"
+          placeholder="Employee ID"
+          value={formData.employeeID}
+          onChange={(e) => setFormData({ ...formData, employeeID: e.target.value })}
           className="w-full mb-4 p-2 border rounded"
         />
         <input
