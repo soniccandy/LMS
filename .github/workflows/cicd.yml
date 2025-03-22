@@ -66,6 +66,6 @@ jobs:
         npm ci
         cd ./backend
         touch .env
-        echo "${{ secrets.PROD_MONGO_URI }}" > .env
+        echo "MONGO_URI=${{ secrets.PROD_MONGO_URI }}" > .env
         pm2 start all
         pm2 restart all
