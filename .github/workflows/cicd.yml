@@ -30,7 +30,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
       
     - name: Stop Running Services
-      run: pm2 stop all
+      run: pm2 stop all || true
 
     # Install dependencies for backend
     - name: Install Backend Dependencies
