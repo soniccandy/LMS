@@ -7,12 +7,17 @@ dotenv.config();
 
 const app = express();
 
+// Configure CORS with more permissive settings
 app.use(cors({
-    origin: 'http://3.26.99.94',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    origin: true, // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
+    preflightContinue: false
 }));
+
+// Enable preflight across the board
+app.options('*', cors());
 
 app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
