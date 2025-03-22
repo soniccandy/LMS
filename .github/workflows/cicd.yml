@@ -68,4 +68,4 @@ jobs:
         touch .env
         echo "${{ secrets.PROD }}" > .env
         pm2 start all
-        pm2 restart all --update-env
+        pm2 restart all
