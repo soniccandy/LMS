@@ -1,0 +1,71 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Trigger CI on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Run tests on pull requests to main
+
+jobs:
+  build-test-deploy:
+    name: Build, Test, and Deploy
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [22]
+
+    environment: MONGO_URI
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Set up Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+      
+    - name: Stop Running Services
+      run: pm2 stop all
+
+    # Install dependencies for backend
+    - name: Install Backend Dependencies
+      working-directory: ./backend
+      run: | 
+       npm install --global yarn
+       yarn --version
+       yarn install
+      
+    # Install dependencies for frontend
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: |
+        df -h
+        sudo rm -rf ./build
+        yarn install
+        yarn run build
+
+    # Run backend tests
+    - name: Run Backend Tests
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        PORT: ${{ secrets.PORT }}
+      working-directory: ./backend
+      run: npm test
+
+    # Deploy to AWS (Only run for pushes to main, not for pull requests)
+    - name: Deploy to AWS
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        echo "Deploying to AWS EC2 instance..."
+        npm ci
+        cd ./backend
+        touch .env
+        echo "${{ secrets.PROD_MONGO_URI }}" > .env
+        pm2 start all
+        pm2 restart all

@@ -31,11 +31,17 @@ const LoanForm = ({ loans, setLoans, editingLoan, setEditingLoan }) => {
 
   useEffect(() => {
     if (editingLoan) {
+      const bookId = typeof editingLoan.book === 'object' ? editingLoan.book._id : editingLoan.book;
+      const memberId = typeof editingLoan.member === 'object' ? editingLoan.member._id : editingLoan.member;
+      
+      const formattedDate = editingLoan.loanDate ? 
+        new Date(editingLoan.loanDate).toISOString().split('T')[0] : '';
+      
       setFormData({
-        book: editingLoan.book,
-        member: editingLoan.member,
-        loanDate: editingLoan.loanDate,
-        returned: editingLoan.returned,
+        book: bookId,
+        member: memberId,
+        loanDate: formattedDate,
+        returned: editingLoan.returned.toString(),
       });
     } else {
       setFormData({ book: '', member: '', loanDate: '', returned: '' });

@@ -61,7 +61,7 @@ const deleteLoan = async (req, res) => {
         const loan = await Loan.findById(req.params.id);
         if (!loan) return res.status(404).json({ message: 'Loan not found!'});
 
-        await Loan.findByIdAndDelete(req.params.id);
+        await loan.remove();
         res.json({ message: 'Loan deleted'});
 
     } catch (error) {

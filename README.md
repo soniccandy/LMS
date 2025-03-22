@@ -1,68 +1,72 @@
-# **Assignment: Full-Stack CRUD Application Development with DevOps Practices**
+***The library management system is designed to help employees (librarians) efficiently manage library books, members, and loan records through a user-friendly interface. It provides functionality for creating, viewing, updating, and deleting information across all key library resources. The system features secure user authentication, allowing staff to sign up and log in to their accounts, as well as profile management to update personal information. With built-in validation for input fields, the application ensures data integrity while enhancing productivity and organisation in library operations.***
 
-## **Objective**
+**This apps **contain** the following features:**
+* Registration
+* Login
+* Logout
+* Update profile
+* Add books
+* View books
+* Update books
+* Delete books
+* Add members
+* View members
+* Update members
+* Delete members
+* Add loans
+* View loans
+* Update loans
+* Delete loans
 
-You have been provided with a starter project that includes user authentication using  **Node.js, React.js, and MongoDB**. Your task is to extend this application by implementing **CRUD (Create, Read, Update, Delete) operations** for a real-world application of your choice, while following industry best practices such as:
+---
 
-* **Project Management with JIRA**
-* **Requirement Diagram using SysML**
-* **Version Control using GitHub**
-* **CI/CD Integration for Automated Deployment**
+**Project Setup Instructions**
 
-## **Requirements**
+To set up this project, please install the following software and create account in following web tools** **
+* **Nodejs [**[https://nodejs.org/en](https://nodejs.org/en)]** **
+* **Git [**[https://git-scm.com/](https://git-scm.com/)]** **
+* **VS code editor** [[https://code.visualstudio.com/](https://code.visualstudio.com/)]** **
+* **MongoDB Account** [[https://account.mongodb.com/account/login](https://account.mongodb.com/account/login)]** 
+* **GitHub Account** [[https://github.com/signup?source=login](https://github.com/signup?source=login)]** **
 
-### **1. Choose a Real-World Application**
+## Clone this repository
+* git clone https://github.com/soniccandy/LMS.git
+* cd LMS
 
-Select a meaningful use case for your CRUD operations. We will provide the list, you have to select it.
+## Install all dependencies (frontend, backend)
+*  npm run install-all
 
-### **2. Project Management with JIRA and SysML**
+## Configure environment variables
+*  Backend .env file (create in backend/ directory)
+*  PORT=5001
+*  MONGODB_URI=<yourconnectionstring>
+*  JWT_SECRET=your_jwt_secret
 
-* Create a **JIRA project** and define:
-  * **Epic**
-  * **User Stories** (features required in your app)
-  * **Child issues & Subtasks** (breaking down development work)
-  * **Sprint Planning** (organizing work into milestones)
-* Document your JIRA **board URL** in the project README.
-* Draw a requirements diagram
+## Start development servers
+*  npm start or npm run dev
 
-### **3. Backend Development (Node.js + Express + MongoDB)**
+---
 
-* Create a user-friendly interface to interact with your API (Some portion developed, follow task manager app)).
-* Implement **forms** for adding and updating records.
-* Display data using  **tables, cards, or lists (Follow how we showed data in task manager app)**
+**CI/CI Pipeline Details**
 
-### **4. Frontend Development (React.js)**
+## Workflow triggers
+*  **Name**: CI/CD
+*  Automatically runs on push or pull requests to the main branch
+*  Provides testing for all events and deployment for push events only
 
-* Create a user-friendly interface to interact with your API (**Some portion developed, follow task manager app)**.
-* Implement **forms** for adding, showing, deleting and updating records (CRUD).
-* Display data using  **tables, cards, or lists (Follow how we showed data in task manager app)**
+## Jobs and environment
+*  Single job named "Build, Test and Deploy" that handles the entire pipeline
+*  Runs on self hosted EC2 runner
+*  Uses Node.js version 22
+*  Requires Mongo URI environment secrets
 
-### **5. Authentication & Authorization**
-
-* Ensure **only authenticated users** can access and perform CRUD operations. (Already developed in your project)
-* Use **JWT (JSON Web Tokens)** for user authentication (Use the task manager one from .env file).
-
-### **6. GitHub Version Control & Branching Strategy**
-
-* Use **GitHub for version control** and maintain:
-  * `main` branch (stable production-ready code)
-  * Feature branches (`feature/xyz`) for each new functionality
-* Follow proper **commit messages** and  **pull request (PR) reviews** .
-
-### **7. CI/CD Pipeline Setup**
-
-* Implement a **CI/CD pipeline using GitHub Actions** to:
-  * Automatically **run tests** on every commit/pull request (Optional).
-  * Deploy the **backend** to **AWS** .
-  * Deploy the **frontend** to **AWS**.
-* Document your  **CI/CD workflow in the README** .
-
-## **Submission Requirements**
-
-* **JIRA Project Board URL** (user stories ).
-* **Requirment diagram** (Using project features)
-* **GitHub Repository** (`backend/` and `frontend/`).
-* **README.md** with:
-
-  * Project setup instructions.
-  * CI/CD pipeline details.
+## Pipeline steps
+*  **Checkout Code**: Clone the repository to runner
+*  **Set up Node.js**: Configure the specified Node.js version
+*  **Stop Running Services**: Stop existing PM2 processes
+*  **Install Backend Dependencies**: Set up yarn and installs backend packes
+*  **Install Frontend Dependencies**: Build frontend application
+*  **Run Backend Tests**: Run tests with the requires environment variables
+*  **Deploy to AWS** (Only for pushes to main, not for pull requests): 
+*    Update environment configuration
+*    Start and restart application processes via PM2
