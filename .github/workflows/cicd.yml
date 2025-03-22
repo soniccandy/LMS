@@ -67,5 +67,7 @@ jobs:
         cd ./backend
         touch .env
         echo "MONGO_URI=${{ secrets.PROD_MONGO_URI }}" > .env
+        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+        echo "PORT=${{ secrets.PORT }}" >> .env
         pm2 start all
         pm2 restart all
