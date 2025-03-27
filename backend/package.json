@@ -19,7 +19,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
     "request": "^2.88.2",
-    "library-management-system": "file:.."
   },
   "devDependencies": {
     "esm": "^3.2.25",

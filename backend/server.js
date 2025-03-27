@@ -7,11 +7,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-    origin: ['http://3.26.99.94', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-}));
-
+app.use(cors());
 app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/books', require('./routes/bookRoutes'));
