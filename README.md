@@ -18,12 +18,12 @@
 * Update loans
 * Delete loans
 
----
+
 
 ## Jira Board URL
 https://aprilshao27.atlassian.net/jira/software/projects/LMS/boards/34
 
----
+
 
 ## Project Setup Instructions
 
@@ -50,9 +50,9 @@ To set up this project, please install the following software and create account
 **Start development servers**
 *  npm start or npm run dev
 
----
 
-##CI/CI Pipeline Details
+
+## CI/CI Pipeline Details
 
 **Workflow triggers**
 *  **Name**: CI/CD
