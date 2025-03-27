@@ -20,6 +20,11 @@
 
 ---
 
+**Jira Board URL**
+https://aprilshao27.atlassian.net/jira/software/projects/LMS/boards/34
+
+---
+
 **Project Setup Instructions**
 
 To set up this project, please install the following software and create account in following web tools** **
